@@ -2,7 +2,7 @@ UI Automation Exercise
 ========================
 
 <!-- Replace OWNER/REPO with your GitHub username and repository name after pushing -->
-![Playwright](https://github.com/OWNER/REPO/actions/workflows/playwright.yml/badge.svg)
+![Playwright](https://github.com/anu-sam/QA_Exercise/actions/workflows/playwright.yml/badge.svg)
 
 ## Background
 This assignment has been completed as a part of the assessment for WEB test automation skills to construct an automation suite using `TypeScript` via VSCode on top of the `Playwright` framework and `Node.js` platform.
