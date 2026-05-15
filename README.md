@@ -1,8 +1,7 @@
 UI Automation Exercise
 ========================
 
-<!-- Replace OWNER/REPO with your GitHub username and repository name after pushing -->
-![Playwright](https://github.com/OWNER/REPO/actions/workflows/playwright.yml/badge.svg)
+![Playwright](https://github.com/anu-sam/QA_Exercise/actions/workflows/playwright.yml/badge.svg)
 
 ## Background
 This assignment has been completed as a part of the assessment for WEB test automation skills to construct an automation suite using `TypeScript` via VSCode on top of the `Playwright` framework and `Node.js` platform.
@@ -130,9 +129,8 @@ On failure, download **playwright-report-*** and **test-results-*** artifacts fr
 ### Enable CI on GitHub
 
 1. Push this repository to GitHub.
-2. Replace `OWNER/REPO` in the status badge at the top of this README with your GitHub path.
-3. Open **Actions** and confirm the **Playwright** workflow is allowed to run.
-4. Optional: add repository variable `BASE_URL` if you need a non-default target URL.
+2. Open **Actions** and confirm the **Playwright** workflow is allowed to run.
+3. Optional: add repository variable `BASE_URL` if you need a non-default target URL.
 
 ### Branch protection (optional)
 
