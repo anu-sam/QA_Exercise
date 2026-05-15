@@ -1,0 +1,19 @@
+{
+  "name": "qa-exercise",
+  "version": "1.0.0",
+  "description": "Playwright UI automation for the-internet.herokuapp.com",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:ci": "playwright test --project=chromium",
+    "test:report": "playwright show-report"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "dotenv": "^16.4.7"
+  }
+}
