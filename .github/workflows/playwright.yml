@@ -1,4 +1,10 @@
 # Playwright UI tests — https://playwright.dev/docs/ci-intro
+#
+# Job strategy:
+#   PR          → Smoke (Chromium) only — fast feedback, no duplicate runs
+#   Push main   → Full matrix (chromium, firefox, webkit) — cross-browser on merge
+#   Schedule    → Smoke (Chromium) — weekly health check
+#   Manual run  → Full matrix
 
 name: Playwright
 
@@ -12,12 +18,12 @@ on:
     - cron: '0 6 * * 1'
 
 env:
-  # Optional: create variable BASE_URL in repo Settings → Actions → Variables
   BASE_URL: ${{ vars.BASE_URL }}
 
 jobs:
   smoke:
     name: Smoke (Chromium)
+    if: github.event_name == 'pull_request' || github.event_name == 'schedule'
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
@@ -57,7 +63,9 @@ jobs:
 
   full-browsers:
     name: Full (${{ matrix.browser }})
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    if: |
+      (github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')) ||
+      github.event_name == 'workflow_dispatch'
     timeout-minutes: 45
     runs-on: ubuntu-latest
     strategy:

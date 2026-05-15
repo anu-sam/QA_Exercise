@@ -80,7 +80,6 @@ Defaults live in `config/env.ts`. Override without editing code:
 | `DROPDOWN_OPTION` | Dropdown option label | `Option 2` |
 
 **Local:** copy `.env.example` to `.env` and adjust values (`.env` is gitignored).
-
 **CI:** in GitHub, go to **Settings → Secrets and variables → Actions → Variables** and add `BASE_URL` (optional; default is used if unset).
 
 `playwright.config.ts` reads `baseURL` from `config/env.ts`, so tests use `homePage.goto()` with a relative path (`/`).
@@ -119,10 +118,10 @@ Workflow file: `.github/workflows/playwright.yml`
 
 | Trigger | What runs |
 |---------|-----------|
-| Push / PR to `main` or `master` | **Smoke** — Chromium only |
-| Push to `main` or `master` | **Full** — Chromium, Firefox, WebKit (parallel) |
-| Weekly (Mondays 06:00 UTC) | Smoke job |
-| **Actions → Playwright → Run workflow** | Manual smoke run |
+| **Pull request** to `main` or `master` | **Smoke (Chromium)** only — fast PR gate |
+| **Push** to `main` or `master` | **Full** — Chromium, Firefox, WebKit (parallel, no duplicate smoke) |
+| Weekly (Mondays 06:00 UTC) | **Smoke (Chromium)** |
+| **Actions → Playwright → Run workflow** | **Full** matrix (all three browsers) |
 
 On failure, download **playwright-report-*** and **test-results-*** artifacts from the workflow run. JUnit output is written to `test-results/junit.xml` when `CI=true`.
 
