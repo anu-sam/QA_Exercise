@@ -26,7 +26,7 @@ High-level architecture (big picture)
 - Configuration layer: config/env.ts stores baseURL and test data. .env can override values; README.md explains copying .env.example -> .env.
 - Fixtures: fixtures/test.ts extends Playwright's test and wires page-object fixtures (eg. homePage, alertsPage). Tests import test/expect from fixtures/test.ts, not directly from @playwright/test.
 - Page objects: pages/*.ts contain locators and UI actions only (no assertions). Keep page classes focused on actions/state.
-- Specs: tests/qa-ex.test.ts contains flow and expect assertions. Use fixture-provided pages and baseURL-relative navigation.
+- Specs: tests/qa-ex.test.ts contains flow and expect assertions. Use fixture-provided pages and baseURL-relative navigation. Long flows are split into focused tests (eg. JavaScript Alerts uses a describe block with beforeEach and one test per dialog type).
 
 Key conventions (project-specific)
 - Tests must import the project fixture (fixtures/test.ts). Do not import @playwright/test directly in specs.
