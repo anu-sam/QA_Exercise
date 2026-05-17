@@ -127,6 +127,8 @@ Workflow files: `.github/workflows/quality.yml` (typecheck + lint), `.github/wor
 
 On failure, download **playwright-report-*** and **test-results-*** artifacts from the workflow run. JUnit output is written to `test-results/junit.xml` when `CI=true`.
 
+Workflows pin third-party Actions to patch versions (for example `actions/checkout@v4.2.2`) and set `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` for Node 24 compatibility. **Dependabot** (`.github/dependabot.yml`) opens weekly update PRs for Actions and npm.
+
 ### Enable CI on GitHub
 
 1. Push this repository to GitHub.

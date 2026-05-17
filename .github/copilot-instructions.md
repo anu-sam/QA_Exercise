@@ -34,6 +34,7 @@ Key conventions (project-specific)
 - Register any new page objects in fixtures/test.ts via extend({ ... }).
 - Use config/env.ts for shared values (BASE_URL, JS_PROMPT_NAME, DROPDOWN_OPTION). Prefer environment variables for CI overrides.
 - CI behavior: when CI=true, playwright.config.ts sets retries=2, workers=1, and reporter includes github/html/junit; junit is written to test-results/junit.xml.
+- GitHub Actions: workflows pin actions/checkout, actions/setup-node, and actions/upload-artifact to patch versions; dependabot.yml maintains them. FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 is set at workflow level.
 - Reports: Playwright HTML reports are saved to playwright-report; use npm run test:report or npx playwright show-report to view.
 
 Repository notes for Copilot sessions
