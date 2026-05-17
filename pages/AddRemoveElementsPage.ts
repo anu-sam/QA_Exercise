@@ -19,6 +19,11 @@ export default class AddRemoveElementsPage {
     return this.page.locator('text=Delete');
   }
 
+  /** All delete controls in the dynamically generated list. */
+  get deleteButtons(): Locator {
+    return this.page.locator('#elements button');
+  }
+
   /** First delete control in the dynamically generated list. */
   get firstDeleteInList(): Locator {
     return this.page.locator('div#elements>button:nth-of-type(1)');

@@ -94,7 +94,10 @@ test.describe('UI Automation Exercise', () => {
 
     // Batch add three elements, then remove each via the first delete control
     await addremovePage.addElements(3);
+    await expect(addremovePage.deleteButtons).toHaveCount(3);
+
     await addremovePage.deleteFirstElements(3);
+    await expect(addremovePage.deleteButtons).toHaveCount(0);
   });
 
   test('Test_04: Checkboxes', async ({ page, homePage, checkboxPage }) => {
