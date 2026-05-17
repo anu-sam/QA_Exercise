@@ -96,6 +96,8 @@ Defaults live in `config/env.ts`. Override without editing code:
 npm test                      # all configured browser projects
 npm run test:ci               # Chromium only (same as CI smoke job)
 npm run test:report           # open last HTML report
+npm run typecheck             # TypeScript compile check
+npm run lint                  # ESLint
 ```
 
 Run a single browser project:
@@ -114,12 +116,12 @@ npm run test:ci
 
 ## Continuous integration (GitHub Actions)
 
-Workflow file: `.github/workflows/playwright.yml`
+Workflow files: `.github/workflows/quality.yml` (typecheck + lint), `.github/workflows/playwright.yml` (tests)
 
 | Trigger | What runs |
 |---------|-----------|
-| **Pull request** to `main` or `master` | **Smoke (Chromium)** only — fast PR gate |
-| **Push** to `main` or `master` | **Full** — Chromium, Firefox, WebKit (parallel, no duplicate smoke) |
+| **Pull request** to `main` or `master` | **Quality** (typecheck + lint) and **Smoke (Chromium)** |
+| **Push** to `main` or `master` | **Quality** + **Full** — Chromium, Firefox, WebKit (parallel, no duplicate smoke) |
 | Weekly (Mondays 06:00 UTC) | **Smoke (Chromium)** |
 | **Actions → Playwright → Run workflow** | **Full** matrix (all three browsers) |
 

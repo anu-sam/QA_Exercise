@@ -17,7 +17,9 @@ Test commands
 - Simulate CI (PowerShell): $env:CI = "true"; npm run test:ci
 
 Linting / formatting
-- No repository-wide linter or formatter is configured (no eslint/prettier scripts). If adding, update package.json and docs.
+- Typecheck: npm run typecheck
+- Lint: npm run lint (fix: npm run lint:fix)
+- CI: .github/workflows/quality.yml runs typecheck and lint on every PR and push to main.
 
 High-level architecture (big picture)
 - Runner: playwright.config.ts configures testDir, projects (chromium, firefox, webkit), reporters, retries, and baseURL (from config/env.ts).
@@ -46,7 +48,7 @@ Where to look first
 - fixtures/test.ts and pages/ for how fixtures and page objects are provided to tests
 
 Questions for maintainers (ask before making large changes)
-- Should a linter/formatter be added (ESLint / Prettier)?
+- Should Prettier be added for formatting?
 - Are there preferred browser subsets for local development (chromium-only recommended for fast iteration)?
 
 ---
