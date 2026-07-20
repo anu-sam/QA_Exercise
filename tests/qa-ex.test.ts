@@ -13,49 +13,53 @@ import { test, expect } from '../fixtures/test';
 import { env, routes } from '../config/env';
 
 test.describe('UI Automation Exercise', () => {
-  test('Test_01: JS Alerts', async ({ page, homePage, alertsPage }) => {
-    // Arrange — open JavaScript Alerts from home
-    await homePage.goto();
-    await homePage.openJavaScriptAlerts();
+  test.describe('JavaScript Alerts', () => {
+    test.beforeEach(async ({ page, homePage, alertsPage }) => {
+      await homePage.goto();
+      await homePage.openJavaScriptAlerts();
 
-    // Assert — correct page loaded
-    await expect(page).toHaveURL(routes.javascriptAlerts);
-    await expect(alertsPage.heading).toBeVisible();
-    await expect(alertsPage.heading).toContainText('JavaScript Alerts');
-
-    // Act + assert — JS Alert dialog (accept)
-    page.once('dialog', async (dialog) => {
-      expect(dialog.message()).toEqual('I am a JS Alert');
-      await dialog.accept();
+      await expect(page).toHaveURL(routes.javascriptAlerts);
+      await expect(alertsPage.heading).toBeVisible();
+      await expect(alertsPage.heading).toContainText('JavaScript Alerts');
     });
-    await alertsPage.clickJsAlert();
-    await expect(alertsPage.result).toHaveText('You successfully clicked an alert');
 
-    // Act + assert — JS Confirm dialog (OK)
-    page.once('dialog', async (dialog) => {
-      expect(dialog.message()).toEqual('I am a JS Confirm');
-      await dialog.accept();
+    test('Test_01a: JS Alert dialog', async ({ page, alertsPage }) => {
+      page.once('dialog', async (dialog) => {
+        expect(dialog.message()).toEqual('I am a JS Alert');
+        await dialog.accept();
+      });
+      await alertsPage.clickJsAlert();
+      await expect(alertsPage.result).toHaveText('You successfully clicked an alert');
     });
-    await alertsPage.clickJsConfirm();
-    await expect(alertsPage.result).toHaveText('You clicked: Ok');
 
-    // Act + assert — JS Confirm dialog (Cancel)
-    page.once('dialog', async (dialog) => {
-      expect(dialog.message()).toEqual('I am a JS Confirm');
-      await dialog.dismiss();
+    test('Test_01b: JS Confirm dialog (OK)', async ({ page, alertsPage }) => {
+      page.once('dialog', async (dialog) => {
+        expect(dialog.message()).toEqual('I am a JS Confirm');
+        await dialog.accept();
+      });
+      await alertsPage.clickJsConfirm();
+      await expect(alertsPage.result).toHaveText('You clicked: Ok');
     });
-    await alertsPage.clickJsConfirm();
-    await expect(alertsPage.result).toHaveText('You clicked: Cancel');
 
-    // Act + assert — JS Prompt dialog (accept with test data from config)
-    page.once('dialog', async (dialog) => {
-      expect(dialog.message()).toEqual('I am a JS prompt');
-      await dialog.accept(env.testData.jsPromptName);
+    test('Test_01c: JS Confirm dialog (Cancel)', async ({ page, alertsPage }) => {
+      page.once('dialog', async (dialog) => {
+        expect(dialog.message()).toEqual('I am a JS Confirm');
+        await dialog.dismiss();
+      });
+      await alertsPage.clickJsConfirm();
+      await expect(alertsPage.result).toHaveText('You clicked: Cancel');
     });
-    await alertsPage.clickJsPrompt();
-    await expect(alertsPage.result).toHaveText(
-      `You entered: ${env.testData.jsPromptName}`
-    );
+
+    test('Test_01d: JS Prompt dialog', async ({ page, alertsPage }) => {
+      page.once('dialog', async (dialog) => {
+        expect(dialog.message()).toEqual('I am a JS prompt');
+        await dialog.accept(env.testData.jsPromptName);
+      });
+      await alertsPage.clickJsPrompt();
+      await expect(alertsPage.result).toHaveText(
+        `You entered: ${env.testData.jsPromptName}`
+      );
+    });
   });
 
   test('Test_02: A/B Testing', async ({ page, homePage, abtestPage }) => {
