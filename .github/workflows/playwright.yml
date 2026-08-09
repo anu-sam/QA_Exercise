@@ -33,9 +33,9 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
 
-      - uses: actions/setup-node@v4.4.0
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: 22
           cache: npm
@@ -52,7 +52,7 @@ jobs:
           CI: true
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         if: ${{ !cancelled() }}
         with:
           name: playwright-report-smoke
@@ -60,7 +60,7 @@ jobs:
           retention-days: 14
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         if: ${{ !cancelled() }}
         with:
           name: test-results-smoke
@@ -79,9 +79,9 @@ jobs:
       matrix:
         browser: [chromium, firefox, webkit]
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7.0.1
 
-      - uses: actions/setup-node@v4.4.0
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: 22
           cache: npm
@@ -98,7 +98,7 @@ jobs:
           CI: true
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         if: ${{ !cancelled() }}
         with:
           name: playwright-report-${{ matrix.browser }}
@@ -106,7 +106,7 @@ jobs:
           retention-days: 14
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         if: ${{ !cancelled() }}
         with:
           name: test-results-${{ matrix.browser }}
